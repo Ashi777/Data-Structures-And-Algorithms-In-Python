@@ -1,0 +1,29 @@
+class Solution(object):
+    def findPeakElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n=len(nums)
+        if(n==1): return 0
+        if(nums[0]>nums[1]): return 0
+        if(nums[n-1]>nums[n-2]): return n-1
+        low=1; high=n-2
+        while(low<=high):
+            mid=(low+high)//2
+            if(nums[mid]>nums[mid+1] and nums[mid]>nums[mid-1]):
+                return mid
+            elif(nums[mid]>nums[mid-1]):
+                low=mid+1
+            else:
+                high=mid-1
+        return -1
+
+# Driver Code
+nums = [1, 2, 3, 1]
+sol=Solution()
+ans=sol.findPeakElement(nums)
+print(ans)
+
+# TC -> O(log(base2)N)
+# SC -> O(1)
