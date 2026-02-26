@@ -1,0 +1,30 @@
+class Solution:
+    def lemonadeChange(self, bills):
+        five=0; ten=0
+        for i in range(len(bills)):
+            if bills[i]==5:
+                five+=1
+            elif bills[i]==10:
+                if five:
+                    five-=1
+                    ten+=1
+                else:
+                    return False
+            else:
+                if ten and five:
+                    five-=1
+                    ten-=1
+                elif five>=3:
+                    five-=3
+                else:
+                    return False
+        return True
+
+# Driver Code
+bills = [5,5,5,10,20]
+sol=Solution()
+ans=sol.lemonadeChange(bills)
+print(ans)
+
+# TC -> O(N)
+# SC -> O(1)
